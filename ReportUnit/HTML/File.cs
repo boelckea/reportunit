@@ -534,7 +534,7 @@
                                 $(window).resize(sizing);
                                 function sizing() {
 	                                if ($(window).width() > 1650) {
-		                                $('.fixtures .s4').css('width', '33.33%');
+		                                $('.fixtures .s4').css('width', '50%');
 	                                } else if ($(window).width() < 1120) {
 		                                $('.fixtures .s4').css('width', '99%');
 	                                } else {
