@@ -278,7 +278,7 @@ namespace ReportUnit.Parser
 
                     var output = testcase.SelectSingleNode(".//output");
                     if (output != null) {
-                        errorMsg += "<pre style='height:100pt'>" + output.InnerText.Trim().Left(2000) + "</pre>";
+                        errorMsg += "<pre style='height:100pt'>" + output.InnerText.Trim().Left(5000) + "</pre>";
                     }
 
                     XmlNode desc = testcase.SelectSingleNode(".//property[@name='Description']");
