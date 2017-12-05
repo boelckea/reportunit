@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using ReportUnit.Support;
 using ReportUnit.Layer;
@@ -74,6 +75,15 @@ namespace ReportUnit.Parser
                 _report.Inconclusive = _doc.SelectNodes(".//test-case[@result='Inconclusive' or @result='NotRunnable']").Count;
                 _report.Skipped = _doc.SelectNodes(".//test-case[@result='Skipped' or @result='Ignored']").Count;
                 _report.Errors = _doc.SelectNodes(".//test-case[@result='Error']").Count;
+                XmlNode systemInfoNode = _doc.SelectSingleNode("//test-case[@name=\"GetSystemInformation\"]/output/.");
+                if (systemInfoNode != null) {
+                    string reportSystemInfo = systemInfoNode.InnerText;
+                    Match match = Regex.Match(reportSystemInfo, @"OS Version.{23}(?<os>.{8}).*?\nVersion: (?<sparks>.{8}).*?\nExcel version: (?<excel>.{2}).{14}(?<bit>.{2}).*?\nCurrent culture: (?<culture>.{2}).*?\((?<region>.{2})", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    if (match.Success) {
+                        reportSystemInfo = string.Format("Sparks{2} Excel{0} x{1} {4}-{5} Win{3}", match.Groups["excel"], match.Groups["bit"], match.Groups["sparks"], match.Groups["os"], match.Groups["culture"], match.Groups["region"]);
+                        _report.SystemInfo = reportSystemInfo;
+                    }
+                }
 
                 try
                 {
@@ -278,7 +288,7 @@ namespace ReportUnit.Parser
 
                     var output = testcase.SelectSingleNode(".//output");
                     if (output != null) {
-                        errorMsg += "<pre style='height:100pt'>" + output.InnerText.Trim().Left(5000) + "</pre>";
+                        errorMsg += "<pre style='height:100pt'>" + output.InnerText + "</pre>";
                     }
 
                     XmlNode desc = testcase.SelectSingleNode(".//property[@name='Description']");

@@ -57,5 +57,7 @@
         /// Overall list of test-suites
         /// </summary>
         public List<TestSuite> TestFixtures { get; private set; }
+
+        public string SystemInfo { get; set; }
     }
 }

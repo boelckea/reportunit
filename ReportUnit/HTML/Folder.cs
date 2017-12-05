@@ -382,6 +382,7 @@
                                                 <table class='bordered responsive-table result-table'>
                                                     <tr>
                                                         <th>File</th>
+                                                        <th>System</th>
                                                         <th>Assembly</th>
                                                         <th>Result</th>
                                                         <th>Total</th>
@@ -393,6 +394,7 @@
                                                     <!--%INSERTRESULT%-->
                                                     <tr class='totals-row'>
                                                         <td>TOTAL</td>
+                                                        <td></td>
                                                         <td></td>
                                                         <td></td>
                                                         <td class='totals-all'></td>
@@ -506,7 +508,8 @@
             get
             {
                 return @"<tr>
-                        <td><a href='<!--%FULLFILENAME%-->'><!--%FILENAME%--></a></td>
+                        <td style='width: 17%'><a href='<!--%FULLFILENAME%-->'><!--%FILENAME%--></a></td>
+                        <td style='width: 20%'><!--%SYSTEMINFO%--></td>
                         <td><!--%ASSEMBLY%--></td>
                         <td class='file-status <!--%RUNRESULT%-->'><span class='label'><!--%RUNRESULT%--></span></td>
                         <td class='total-count'><!--%TOTALTESTS%--></td>

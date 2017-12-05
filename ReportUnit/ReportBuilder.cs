@@ -98,7 +98,8 @@
                                 .Replace(ReportHelper.MarkupFlag("totalTests"), reportData.Total.ToString())
                                 .Replace(ReportHelper.MarkupFlag("totalPassed"), passed.ToString())
                                 .Replace(ReportHelper.MarkupFlag("totalFailed"), failed.ToString())
-                                .Replace(ReportHelper.MarkupFlag("allOtherTests"), other.ToString());
+                                .Replace(ReportHelper.MarkupFlag("allOtherTests"), other.ToString())
+                                .Replace(ReportHelper.MarkupFlag("systeminfo"), reportData.SystemInfo);
 
                     if (reportData.Total > 0)
                     {
