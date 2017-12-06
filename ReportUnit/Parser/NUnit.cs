@@ -78,9 +78,9 @@ namespace ReportUnit.Parser
                 XmlNode systemInfoNode = _doc.SelectSingleNode("//test-case[@name=\"GetSystemInformation\"]/output/.");
                 if (systemInfoNode != null) {
                     string reportSystemInfo = systemInfoNode.InnerText;
-                    Match match = Regex.Match(reportSystemInfo, @"OS Version.{23}(?<os>.{8}).*?\nVersion: (?<sparks>.{8}).*?\nExcel version: (?<excel>.{2}).{14}(?<bit>.{2}).*?\nCurrent culture: (?<culture>.{2}).*?\((?<region>.{2})", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    Match match = Regex.Match(reportSystemInfo, @"OS Version.{23}(?<os>.{8}).*?\nVersion: (?<sparks>.{8}).*?\nExcel version: (?<excel>.{2}).{14}(?<bit>.{2}).*?\nCurrent culture: (?<culture>.{2}).*?\((?<region>.{2}).*?\nInterface languageId: (?<gui>.{4})", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (match.Success) {
-                        reportSystemInfo = string.Format("Sparks{2} Excel{0} x{1} {4}-{5} Win{3}", match.Groups["excel"], match.Groups["bit"], match.Groups["sparks"], match.Groups["os"], match.Groups["culture"], match.Groups["region"]);
+                        reportSystemInfo = string.Format("Sparks{2} Win{3}<br/>Excel{0} x{1} {4}-{5} {6}", match.Groups["excel"], match.Groups["bit"], match.Groups["sparks"], match.Groups["os"], match.Groups["culture"], match.Groups["region"], match.Groups["gui"]);
                         _report.SystemInfo = reportSystemInfo;
                     }
                 }
